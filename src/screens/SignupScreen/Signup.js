@@ -1,11 +1,24 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import CustomInput from "../../components/CustomInput/CustomInput";
+import RadioButtonRN from 'radio-buttons-react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Signin = ({navigation}) => {
+
+const Signup = ({navigation}) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const data = [
+        {
+          label: 'Student'
+         },
+         {
+          label: 'Teacher'
+         }
+        ];
 
     return (
         <View style={styles.container}>
@@ -17,35 +30,43 @@ const Signin = ({navigation}) => {
                 <Text>Password:</Text>
                 <CustomInput placeholder={"Password"} value={password} setValue={setPassword} secureTextEntry/>
 
+                <Text>Confirm Password:</Text>
+                <CustomInput placeholder={"Confirm Password"} value={confirmPassword} setValue={setConfirmPassword} secureTextEntry/>
+
+                <Text>Email Address:</Text>
+                <CustomInput placeholder={"abc@gmail.com"} value={email} setValue={setEmail}/>
+
+                <Text>Select One:</Text>
+                <RadioButtonRN
+                    box = {false}
+                    data={data}
+                    initial = {1}
+                    icon={
+                        <Icon
+                        name="check-circle"
+                        size={25}
+                        color="#19647E"
+                        />
+                    }
+                />
+
                 <TouchableOpacity style ={styles.button} 
-                    onPress={() => {
-                        setPassword("");
-                        setUsername("");
-                        navigation.navigate('Home', {screen:'HomeScreen'})
-                        }}> 
-                    <Text style={styles.text}>Login</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style ={styles.centerText}> 
-                    <Text >Forgot Password?</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style ={styles.centerText} 
-                    onPress={() => navigation.navigate('Signup')}
+                    onPress={() => navigation.navigate('Home', {screen:'HomeScreen'})}
                 > 
-                    <Text >Create Account?
-                        <Text style = {styles.register}>  Register</Text>
-                    </Text>
+                    <Text style={styles.text}>SignUp </Text>
                 </TouchableOpacity>
+
+                
+               
 
             </View>
         </View>
     )
 }
-export default Signin;
+export default Signup;
 
-// const {height} = Dimensions.get("screen");
-// const height_logo = height + 0.28;
+
+
 
 const styles = StyleSheet.create({
     container: {
